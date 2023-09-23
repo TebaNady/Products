@@ -22,7 +22,10 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "resolveJsonModule" : true, // => to allow import json
+    "allowSyntheticDefaultImports": true, //=> to allow defult imports
+    "esModuleInterop": true // => to allow defult imports
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -30,4 +33,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   }
+
 }
