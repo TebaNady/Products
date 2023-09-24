@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <img [src]="selectedProduct.thumbnail" [alt]="selectedProduct.title">
+            <div class="row mt-3">
+                <div class="col-2" *ngFor="let pic of selectedProduct.images; let i = index">
+                    <img class="w-100 h-50" [src]="pic">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <h5>{{selectedProduct.title}}</h5>
+            <p>{{selectedProduct.description}}</p>
+            <ngb-rating style="color: rgba(69, 179, 156, 255);" [(rate)]="selectedProduct.rating" [readonly]="true"
+                [max]="5"></ngb-rating> <small> ({{selectedProduct.rating}})</small>
+            <hr>
+            <h5>Price: {{selectedProduct.price | currency:'USD'}}</h5>
+            <hr>
+            <div class="rounded-pill w-25 text-light" style="text-align: center;"
+                [ngClass]="{'bg-success' : selectedProduct.stock >0 , 'bg-danger' : selectedProduct.stock <=0}">{{
+                selectedProduct.stock <= 0 ? 'Out of Stock' : 'In Stock' }}</div>
+                    <p>More Information....</p>
+                    <button class="btn btn-secondary rounded-pill" (click)="toggleCatDiv()">Category</button>
+                    <button class="btn btn-secondary rounded-pill ms-3" (click)="toggleBrdDiv()">Brand</button>
+                    <div *ngIf="showCat">
+                        {{selectedProduct.category}}
+                    </div>
+
+                    <div *ngIf="showBrd">
+                        {{selectedProduct.brand}}
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8 input-group w-25 ">
+                            <button class="btn btn-secondary" (click)="decreaseQuantity()">-</button>
+                            <input class="form-control " type="number" [(ngModel)]="quantity" min="0">
+                            <button class="btn btn-secondary " (click)="increaseQuantity()">+</button>
+                        </div>
+                        <div class="col-4">
+                            <small>Only <small class="text-success">{{selectedProduct.stock}} Items</small>
+                                left!</small>
+                            <small class="d-block">Don't miss it</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6 input-group w-25 ">
+                            <button class="btn btn-success rounded-pill">Buy Now</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-outline-success rounded-pill">Add to card</button>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+    <br>
+<app-footer></app-footer>

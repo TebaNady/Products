@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardsComponent } from './cards/cards.component';
-import { ProductComponent } from './product/product.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { CartComponent } from './cart/cart.component';
+import { CardsComponent } from './products/cards/cards.component';
+import { ProductComponent } from './products/product/product.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { CartComponent } from './products/cart/cart.component';
+import { NotFoundComponent } from './auth/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     component : CardsComponent
   },
   {
-    path : "productDetails",
+    path : "productDetails/:id",
     component : ProductComponent
   },
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path : "cart",
     component : CartComponent
+  },
+  {
+    path : "**",
+    component : NotFoundComponent
   }
 ];
 

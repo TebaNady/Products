@@ -1,0 +1,16 @@
+<div class="card">
+    <img class="card-img-top" [src]="product.thumbnail" [alt]="product.title" height="200px">
+    <div class="rounded-pill w-50 text-light" style="text-align: center; margin-top: 3px; margin-left: 3px;" 
+    [ngClass]="{'bg-success' : product.stock >0 , 'bg-danger' : product.stock <=0}">
+        {{ product.stock <= 0 ? 'Out of Stock' : 'In Stock' }}</div>
+    <div class="card-body pb-0" style="height: 250px;">
+    <a routerLink="" class="link text-decoration-none text-dark" (click)="goToProduct(product.id)">
+        <p class="card-title fw-bold">{{product.title}}</p>
+            <p class="card-title fw-bold text-end">{{product.price | currency:'USD'}}</p>
+            <small class="card-text d-block">{{product.description}}</small>
+            <ngb-rating style="color: rgba(69, 179, 156, 255);" [(rate)]="product.rating"></ngb-rating>
+        </a>
+        </div>
+        <a id="addToCart" class="btn d-block rounded-pill w-50 mb-3 position-absolute bottom-0 end-0" href="cart"
+                role="button">Add to cart</a>
+    </div>

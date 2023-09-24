@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import productsData from '../../assets/products-list.json'
-import { Products } from '../interfaces/products';
-import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import productsData from '../../../assets/products-list.json'
+import { Products } from '../../shared/interfaces/products';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cards',
