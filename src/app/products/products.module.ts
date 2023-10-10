@@ -6,7 +6,8 @@ import { CartComponent } from './cart/cart.component';
 import { CardBodyComponent } from './card-body/card-body.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    RouterModule,
+    SharedModule
   ],
   exports :[
     CardsComponent,

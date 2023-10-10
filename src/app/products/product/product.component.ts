@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Products } from '../../shared/interfaces/products';
-import productsData from '../../../assets/products-list.json'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GetProductsService } from 'src/app/get-products.service';
 
 @Component({
   selector: 'app-product',
@@ -9,13 +9,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  products : Array<Products> = productsData;
   idActive !: number 
   selectedProduct !: Products
-  constructor(private activeRouter : ActivatedRoute){}
+  constructor(private router: Router, private service : GetProductsService, private activeRouter: ActivatedRoute){}
   ngOnInit(){
-    this.idActive = this.activeRouter.snapshot.params['id'];
-    this.selectedProduct = this.products.find((product)=> product.id === +this.idActive) as Products
+    this.idActive = +this.activeRouter.snapshot.params['id'];
+    this.service.getProduct(this.idActive).subscribe(
+      (product) => {
+        this.selectedProduct = product;
+      },
+      (error) => {
+        console.error('Error fetching product details:', error);
+      }
+    );
+    this.getProducts()
+  }
+  getProducts() {
+    this.service.getAllProducts().subscribe((res: any) => {
+      this.selectedProduct = res.products;
+      })
+  }
+  goToProduct(id : number){
+    this.router.navigate(['productDetails',id])
   }
   showCat = false;
   showBrd = false;
@@ -38,5 +53,7 @@ export class ProductComponent {
   increaseQuantity() {
     this.quantity++;
   }
-  
+  addToCart(product: Products) {
+    this.service.addToCart(product);
+  }
 }

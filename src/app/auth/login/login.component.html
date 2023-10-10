@@ -1,17 +1,32 @@
-<form class="container">
+<form class="container" #loginForm = "ngForm" (ngSubmit)="onSubmit(loginForm)">
     <div class="row">
+      
       <label for="inputEmail" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail" placeholder="Enter your Email">
+      <input type="email" name="email" class="form-control" id="inputEmail"
+      placeholder="Enter your Email" aria-describedby="userName"
+      ngModel #email="ngModel" required minlength="15" 
+      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}">
+      <div class="form-text text-danger" *ngIf="email.touched && email.invalid">
+        <p *ngIf="email.errors?.['required']">Please enter valid email</p>
+        <p *ngIf="email.errors?.['pattern']">Please enter valid email, sample: teba7033@gmail.com</p>
+        <p *ngIf="email.errors?.['minlength']">Email length must be 15 letters</p>
+      </div>
     </div>
     <div class="row ">
         <label for="inputPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Enter your Password">
+        <input type="password" name="password" class="form-control" id="inputPassword"
+        placeholder="Enter your Password" aria-describedby="userPassword"
+        ngModel #password="ngModel" required minlength="11" >
+      <div class="form-text text-danger" *ngIf="password.touched && password.invalid">
+        <p *ngIf="password.errors?.['required']">Please enter valid password</p>
+        <p *ngIf="password.errors?.['minlength']">Password must be at least 11 letters</p>
       </div>
-      <div class="row ">
-        <p>Don't have an account? <a routerLink="register">Register</a></p>
+      </div>
+      <div class="row">
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
       </div>
     <div class="row mt-3">
-      <button class="rounded-pill" type="submit">Login</button>
-      
+      <button class="rounded-pill" type="submit" [disabled]="loginForm.invalid">Login</button>
     </div>
   </form>
+  
